@@ -10,13 +10,26 @@ enquanto que a segunda retorna o valor ordinal de um caractere de acordo com a t
 import Data.Char
 import Data.Ord
 
-somaCarac :: [String] -> Int
-somaCarac l = soma (concat [(filter (isAlpha) x) | x <- l])
 
+--função principal
+somaCarac :: [String] -> ([(Char, Int)],Int)
+somaCarac l = ((retornaCharInt (stringParaChar l)), somaString l)
+
+somaString :: [String] -> Int
+somaString l = soma (concat [(filter (isAlpha) x) | x <- l])
 
 soma :: [Char] -> Int
 soma [] = 0
 soma (x:xs) = ord x + soma xs    
+
+retornaCharInt :: [Char] -> [(Char, Int)]
+retornaCharInt l = [(x, ord x) | x <- l]
+
+stringParaChar :: [String] -> [Char]
+stringParaChar l = concat [(filter (isAlpha) x) | x <- l]
+
+
+
 
 
 
