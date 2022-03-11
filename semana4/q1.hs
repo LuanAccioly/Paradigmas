@@ -12,25 +12,8 @@ import Data.Ord
 
 --função principal
 somaCarac :: [String] -> Int
-somaCarac l = somaString l
-
-somaString :: [String] -> Int
-somaString l = soma (concat [(filter (isAlpha) x) | x <- l])
+somaCarac l = soma (concat [(filter (isAlpha) x) | x <- l])
 
 soma :: [Char] -> Int
 soma [] = 0
 soma (x:xs) = ord x + soma xs    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
