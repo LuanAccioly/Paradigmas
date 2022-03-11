@@ -28,7 +28,3 @@ removeDuplicados (x:xs) = x: (removeDuplicados (remove x xs))
         remove x [] = []
         remove x (y:ys) | x==y = remove x ys
                         | otherwise = y:(remove x ys)
-
-
-
-
