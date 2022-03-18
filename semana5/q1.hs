@@ -19,7 +19,6 @@
 
     OBS: para definir um valor do tipo bloco é só especificar (Bloco ind trs prox), onde ind é um inteiro, trs é uma lista de transações e prox é um Maybe Bloco. O mesmo se aplica ao tipo Transacao.
 -}
-
 data Transacao = Transacao String String Float deriving (Show)
 data Bloco = Bloco Int [Transacao] (Maybe Bloco) deriving (Show)
 
@@ -49,5 +48,3 @@ verificador x (Bloco a b (Just (c)))  | (mostraBloco x (Bloco a b (Just (c)))) =
 
 
 mostraBloco (Bloco 1 [(Transacao "123" "321" 54.5)] (Just ((Bloco 2 [(Transacao "123" "321" 100.0)] Nothing)))) (Bloco 2 [(Transacao "123" "321" 1.0)] Nothing)
-
-

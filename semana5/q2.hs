@@ -18,26 +18,27 @@
 -}
 
 
-data TiposCompostos = Bag [Int] | Seq [Int] | Set [Int]
-data RetornoComposto = Sacola [(Int, Int)] | Sequencia [Int] | Conjunto [Int] deriving (Show)
+data TiposCompostos a = Bag [a] |  Seq [a] | Set [a]  deriving (Eq)
+data RetornoComposto a = Sacola [(a, Int)] | Sequencia [a] | Conjunto [a] deriving (Show, Eq)
 
-getElements :: TiposCompostos -> RetornoComposto
-getElements (Seq x) = (Sequencia x)
+--Função principal
+getElements :: Eq a => TiposCompostos a -> RetornoComposto a
+getElements (Seq x) = Sequencia x
 getElements (Set x) = Conjunto (removeDuplicados x)
 getElements (Bag x) = Sacola (removeDuplicados (aux x))
+
+-- getElements (Set [True, True, False])
+removeDuplicados :: Eq a => [a] -> [a]
+removeDuplicados [] = []
+removeDuplicados (x:xs) = x: (removeDuplicados (remove x xs))
+    where
+        remove:: Eq a => a -> [a] -> [a]
+        remove x [] = []
+        remove x (y:ys) | (x == y) = remove x ys
+                        | otherwise = y:(remove x ys) 
 
 aux :: Eq a => [a] -> [(a, Int)]
 aux l = [(x, contador(l, x)) | x <- l]
 
 contador :: Eq a => ([a], a) -> Int
 contador (l, x) = length((filter (==x) l))
-
-
-removeDuplicados::Eq a => [a]->[a]
-removeDuplicados [] = []
-removeDuplicados (x:xs) = x: (removeDuplicados (remove x xs))
-    where
-        remove::Eq a => a -> [a] -> [a]
-        remove x [] = []
-        remove x (y:ys) | x==y = remove x ys
-                        | otherwise = y:(remove x ys)
