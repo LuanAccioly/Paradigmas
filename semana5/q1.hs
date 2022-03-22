@@ -39,12 +39,7 @@ volume (x:xs) = (pegaValor x) + (volume xs)
 pegaValor :: Transacao -> Float
 pegaValor (Transacao x y z) = z
 
-valor (Just x) = x
-
 verificador :: Bloco -> Bloco -> Int
 verificador x (Bloco a b (Nothing)) = mostraBloco x (Bloco a b (Nothing))
 verificador x (Bloco a b (Just (c)))  | (mostraBloco x (Bloco a b (Just (c)))) == a = verificador (Bloco a b (Just (c))) c
                                                            | otherwise = verificador x c
-
-
-mostraBloco (Bloco 1 [(Transacao "123" "321" 54.5)] (Just ((Bloco 2 [(Transacao "123" "321" 100.0)] Nothing)))) (Bloco 2 [(Transacao "123" "321" 1.0)] Nothing)

@@ -27,7 +27,6 @@ getElements (Seq x) = Sequencia x
 getElements (Set x) = Conjunto (removeDuplicados x)
 getElements (Bag x) = Sacola (removeDuplicados (aux x))
 
--- getElements (Set [True, True, False])
 removeDuplicados :: Eq a => [a] -> [a]
 removeDuplicados [] = []
 removeDuplicados (x:xs) = x: (removeDuplicados (remove x xs))
