@@ -16,10 +16,9 @@
     - média de pessoas que coabitam com pessoas com diagnóstico ou suspeita de infecção por COVID-19.
 -}
 
-import Data.Char
 import Data.List
 
-relatorio2 = do 
+relatorioCovid = do 
                 
         putStrLn "Digite seu primeiro nome: "                    
         nome <- getLine
@@ -29,9 +28,9 @@ relatorio2 = do
                     putStrLn "Voce coabita com pessoas com diagnostico ou suspeita de infeccao por COVID-19? R - 's' para sim e 'n' para nao."
                     coabitaInfectados <- getLine
                     appendFile "relatorio.txt" ( nome ++ " " ++ confirmadoCovid ++ " " ++ coabitaInfectados ++ "\n")
-                    relatorio2
+                    relatorioCovid
 
-        else mairo    
+        else aux    
 
 mediaInfectados :: String -> Float
 mediaInfectados l = fromIntegral(length ([x | x <- (lines l), (isInfixOf "s s" x) || (isInfixOf "s n" x)])) / fromIntegral(totalRespostas l)
@@ -39,7 +38,7 @@ mediaInfectados l = fromIntegral(length ([x | x <- (lines l), (isInfixOf "s s" x
 mediaConvivio :: String -> Float
 mediaConvivio l = fromIntegral(length ([x | x <- (lines l), (isInfixOf "s s" x) || (isInfixOf "n s" x)])) / fromIntegral(totalRespostas l)
 
-mairo = do 
+aux = do 
     c <- readFile "relatorio.txt"
     appendFile "covid.txt" ( c ++ "\nTotal respostas: " ++ (show (totalRespostas c)) ++ "\nMedia contaminados: " ++ (show(mediaInfectados c)) ++ "\nmedia pessoas que coabitam: " ++ (show(mediaConvivio c)))
     putStrLn "As informacoes foram adicionadas ao arquivo covid.txt"
