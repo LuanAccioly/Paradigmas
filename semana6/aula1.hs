@@ -27,7 +27,4 @@ manipulaArquivo = do putStrLn "Digite o nome do arquivo"
                      writeFile "/textos/texto.txt" conteudoArquivo
                      appendFile nomeArquivo "\n===Fim==="
                      c <- readFile nomeArquivo
-                     putStrLn c
-
-
-               
+                     putStrLn c           
